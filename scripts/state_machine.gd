@@ -1,0 +1,30 @@
+class_name StateMachine
+extends Node2D
+
+@export var DefaultState : State
+
+var state_dict := {}
+var current_state : State
+
+func _ready() -> void:
+	for child in get_children():
+		if child is State:
+			print(child.get_StateName())
+			state_dict.set(child.get_StateName(),child)
+	
+	current_state = DefaultState
+	current_state.On_State_Enter.call_deferred()
+	pass
+
+func Set_State(state: String) -> void:
+	if(state_dict.find_key(state) == null):
+		push_error("State "+state+" is not in the state dict!")
+ 
+	current_state.On_State_End()
+	current_state = state_dict[state]
+	current_state.On_State_Enter()
+	pass
+
+func _process(delta: float) -> void:
+	current_state.On_State_Process(delta)
+	pass
