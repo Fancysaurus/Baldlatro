@@ -1,17 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ns5t4vvaix7a"]
+[gd_scene load_steps=3 format=3 uid="uid://ns5t4vvaix7a"]
 
 [ext_resource type="Script" uid="uid://ci1dp5vkp1fkh" path="res://game.gd" id="1_feb5d"]
-[ext_resource type="Script" uid="uid://dk6fj1yw7u5ay" path="res://scripts/state_machine.gd" id="2_fc0e3"]
-[ext_resource type="Script" uid="uid://dd1fj4i1iyx1o" path="res://scripts/state.gd" id="3_7jktm"]
+[ext_resource type="PackedScene" uid="uid://ncde3jr714yj" path="res://core/grabable/grabable.tscn" id="2_e2o6t"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_feb5d")
 
-[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("DefaultState")]
-script = ExtResource("2_fc0e3")
-DefaultState = NodePath("State")
-
-[node name="State" type="Node" parent="StateMachine"]
-script = ExtResource("3_7jktm")
-StateName = " Test"
-metadata/_custom_type_script = "uid://dd1fj4i1iyx1o"
+[node name="Grabable" parent="." instance=ExtResource("2_e2o6t")]

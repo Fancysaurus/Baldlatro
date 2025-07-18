@@ -13,7 +13,7 @@ func _ready() -> void:
 			state_dict.set(child.get_StateName(),child)
 	
 	current_state = DefaultState
-	current_state.On_State_Enter.call_deferred()
+	call_deferred("current_state.On_State_Enter")
 	pass
 
 func Set_State(state: String) -> void:
