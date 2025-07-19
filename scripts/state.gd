@@ -12,6 +12,3 @@ func On_State_Process(delta : float):
 	
 func On_State_End():
 	pass
-
-func get_StateName() -> String:
-	return StateName

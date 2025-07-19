@@ -1,11 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://ncde3jr714yj"]
 
 [ext_resource type="Script" uid="uid://dk6fj1yw7u5ay" path="res://scripts/state_machine.gd" id="1_qdmp5"]
-[ext_resource type="Script" uid="uid://dd1fj4i1iyx1o" path="res://scripts/state.gd" id="2_q655j"]
 [ext_resource type="Script" uid="uid://bywpelqnfmoy8" path="res://core/grabable/states/idle.gd" id="2_ypmye"]
 [ext_resource type="Script" uid="uid://dwuba0ibi15un" path="res://core/grabable/states/hover.gd" id="3_n6bnl"]
+[ext_resource type="Script" uid="uid://b1m727ifsl2h4" path="res://core/grabable/states/select.gd" id="4_ypmye"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7m87t"]
+size = Vector2(77, 115)
 
 [node name="Grabable" type="Node2D" node_paths=PackedStringArray("DefaultState")]
 script = ExtResource("1_qdmp5")
@@ -15,6 +16,7 @@ metadata/_custom_type_script = "uid://dk6fj1yw7u5ay"
 [node name="HoverArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
+position = Vector2(28.5, 47.5)
 shape = SubResource("RectangleShape2D_7m87t")
 
 [node name="Idle" type="Node" parent="." node_paths=PackedStringArray("Hover_State")]
@@ -30,14 +32,11 @@ Select_State = NodePath("../Select")
 StateName = "Hover"
 metadata/_custom_type_script = "uid://dd1fj4i1iyx1o"
 
-[node name="Select" type="Node" parent="."]
-script = ExtResource("2_q655j")
+[node name="Select" type="Node" parent="." node_paths=PackedStringArray("Idle_State", "Hover_State")]
+script = ExtResource("4_ypmye")
+Idle_State = NodePath("../Idle")
+Hover_State = NodePath("../Hover")
 StateName = "Select"
-metadata/_custom_type_script = "uid://dd1fj4i1iyx1o"
-
-[node name="Drop" type="Node" parent="."]
-script = ExtResource("2_q655j")
-StateName = "Drop"
 metadata/_custom_type_script = "uid://dd1fj4i1iyx1o"
 
 [connection signal="mouse_entered" from="HoverArea" to="Idle" method="_on_hover_area_mouse_entered"]
